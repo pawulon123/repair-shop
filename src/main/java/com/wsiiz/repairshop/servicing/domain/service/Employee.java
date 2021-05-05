@@ -11,5 +11,5 @@ public class Employee {
 
   Long employeeId;
   String employeeName;
-  LocalTime hireData;
+
 }
