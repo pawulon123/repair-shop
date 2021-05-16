@@ -1,4 +1,10 @@
 package com.wsiiz.repairshop.enterprise.domain.employee;
 
-public class EmployeeFactory {
+import com.wsiiz.repairshop.foundation.domain.AbstractFactory;
+
+public class EmployeeFactory implements AbstractFactory<Employee> {
+    @Override
+    public Employee create() {
+        return new Employee();
+    }
 }
