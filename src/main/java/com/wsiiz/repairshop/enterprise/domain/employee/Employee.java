@@ -18,8 +18,8 @@ public class Employee extends BaseEntity {
     String name;
     String surName;
         @Enumerated(value = EnumType.STRING)
-    TypeOfEmployment typeOfEmployment;
-    LocalDateTime dateOfEmployment;
+    TypeEmployment typeEmployment;
+    LocalDateTime dateEmployment;
     Long branchId;
 //    List<EmployeeSkill> skills
 
