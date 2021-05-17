@@ -19,7 +19,7 @@ public class EmployeeController {
     public ResponseEntity<Employee> addNew(
             @RequestBody Employee employee
         ) {
-//      userAccount.getRoles().forEach(r -> r.setUserAccount(userAccount));
+      employee.getSkills().forEach(s -> s.setEmployee(employee));
         return ResponseEntity.created(null).body(employeeRepository.save(employee));
     }
     @GetMapping("/employee/{id}")

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -21,6 +22,8 @@ public class Employee extends BaseEntity {
     TypeEmployment typeEmployment;
     LocalDateTime dateEmployment;
     Long branchId;
-//    List<EmployeeSkill> skills
+
+    @OneToMany(mappedBy = "employee", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    List<EmployeeSkill> skills;
 
 }
