@@ -22,10 +22,22 @@ public class BranchController {
     public Optional<Branch> getOne(@PathVariable("id") Long id) {
         return branchRepository.findById(id);
     }
-    @GetMapping("/branch")
-    public ResponseEntity<List<Branch>> getMany(){
-        return ResponseEntity.ok(branchRepository.findAll());
-    }
+
+   @GetMapping("/branch")
+   public ResponseEntity<List<Branch>> getMany(
+           @RequestParam(value = "city", required = false) String city,
+           @RequestParam(value = "parent", required = false) Long parentId
+   ) {
+        if (city == null && parentId == null) {
+            return ResponseEntity.ok(branchRepository.findAll());
+        }else if (city != null && parentId == null){
+            return ResponseEntity.ok(branchRepository.findByCity(city));
+        }else if (parentId != null && city == null){
+            return ResponseEntity.ok(branchRepository.findByParentId(parentId));
+        }else{
+            return ResponseEntity.ok(branchRepository.findByParentIdAndCity(parentId, city));
+        }
+   }
     @DeleteMapping("/branch/{id}")
     public ResponseEntity<ResponseEntity> remove(@PathVariable("id") Long id) {
         Optional<Branch> branch = branchRepository.findById(id);

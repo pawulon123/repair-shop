@@ -16,6 +16,7 @@ import javax.persistence.*;
 
 public class Branch extends BaseEntity {
     String name;
+    Long parentId ;
 
         @AttributeOverrides({
                 @AttributeOverride(name = "country", column = @Column(name = "STATIONING_COUNTRY")),
@@ -24,7 +25,7 @@ public class Branch extends BaseEntity {
                 @AttributeOverride(name = "street", column = @Column(name = "STATIONING_STREET")),
                 @AttributeOverride(name = "numberBuilding", column = @Column(name = "STATIONING_NUMBER_BUILDING")),
         })
-   Address stationingAdress;
+   Address stationingAddress;
 
         @AttributeOverrides({
                 @AttributeOverride(name = "country", column = @Column(name = "CORRESPONDENCE_COUNTRY")),
