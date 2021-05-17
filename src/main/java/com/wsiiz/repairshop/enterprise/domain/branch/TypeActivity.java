@@ -1,5 +1,5 @@
 package com.wsiiz.repairshop.enterprise.domain.branch;
 
-public enum TypeOfActivity {
+public enum TypeActivity {
     SERVICE, SALE, MIX;
 }

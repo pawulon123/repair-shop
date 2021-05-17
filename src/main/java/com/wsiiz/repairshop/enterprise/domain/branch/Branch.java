@@ -36,5 +36,5 @@ public class Branch extends BaseEntity {
    Address correspondenceAddress;
 
         @Enumerated(value = EnumType.STRING)
-    TypeOfActivity typeOfActivity;
+   TypeActivity typeActivity;
 }

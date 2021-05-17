@@ -28,6 +28,11 @@ public class EmployeeController {
     public ResponseEntity<List<Employee>> getMany(){
         return ResponseEntity.ok(employeeRepository.findAll());
     }
+
+    @GetMapping("/employee/branch/{id}")
+    public ResponseEntity<List<Employee>> getByBranch(@PathVariable("id") Long id) {
+            return ResponseEntity.ok(employeeRepository.findByBranchId(id));
+    }
     @DeleteMapping("/employee/{id}")
     public ResponseEntity<ResponseEntity> remove(@PathVariable("id") Long id) {
         Optional<Employee> employee = employeeRepository.findById(id);
@@ -39,6 +44,7 @@ public class EmployeeController {
             return ResponseEntity.notFound().build();
         }
     }
+
 
 
 }
