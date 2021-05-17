@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 @Entity
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = true)
-@ToString(exclude = "userAccount")
+@ToString(exclude = "employee")
 @NoArgsConstructor
 
 public class EmployeeSkill extends BaseEntity {

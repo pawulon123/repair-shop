@@ -14,7 +14,10 @@ public class BranchController {
     BranchRepository branchRepository;
 
     @PostMapping("/branch")
-    public ResponseEntity<Branch> addNew(@RequestBody Branch branch) {
+    public ResponseEntity<Branch> addNew(
+            @RequestBody Branch branch
+    ) {
+        branch.getEmployees().forEach(e -> e.setBranch(branch));
 //      userAccount.getRoles().forEach(r -> r.setUserAccount(userAccount));
         return ResponseEntity.created(null).body(branchRepository.save(branch));
     }

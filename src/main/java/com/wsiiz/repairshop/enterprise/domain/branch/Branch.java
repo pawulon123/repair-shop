@@ -1,5 +1,6 @@
 package com.wsiiz.repairshop.enterprise.domain.branch;
 
+import com.wsiiz.repairshop.enterprise.domain.employee.Employee;
 import com.wsiiz.repairshop.foundation.domain.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -38,4 +40,7 @@ public class Branch extends BaseEntity {
 
         @Enumerated(value = EnumType.STRING)
    TypeActivity typeActivity;
+
+        @OneToMany(mappedBy = "branch", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+   List<Employee> employees;
 }
