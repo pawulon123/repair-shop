@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Data
@@ -17,8 +18,8 @@ import java.util.List;
 @AllArgsConstructor
 
 public class Branch extends BaseEntity {
+
     String name;
-    Long parentId ;
 
         @AttributeOverrides({
                 @AttributeOverride(name = "country", column = @Column(name = "STATIONING_COUNTRY")),
@@ -43,4 +44,21 @@ public class Branch extends BaseEntity {
 
         @OneToMany(mappedBy = "branch", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
    List<Employee> employees;
+
+        @Transient()
+  Optional<Branch> parent;
+  Long parentId;
+
+        @Transient()
+  Optional<Branch> child;
+  Long childId;
+
+//    @ManyToOne(cascade={CascadeType.ALL})
+//    @JoinColumn(name="parentId")
+//    @JsonIgnore
+//    private Branch parent;
+//
+//    @OneToMany(mappedBy="parent")
+//    private Set<Branch> subordinates = new HashSet<Branch>();
+
 }

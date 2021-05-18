@@ -21,9 +21,9 @@ import javax.persistence.ManyToOne;
 public class EmployeeSkill extends BaseEntity {
     Long skillId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "employee_id")
-    @JsonIgnore
+        @ManyToOne(fetch = FetchType.EAGER)
+        @JoinColumn(name = "employee_id")
+        @JsonIgnore
     Employee employee;
 
 }

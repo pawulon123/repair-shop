@@ -18,7 +18,6 @@ public class BranchController {
             @RequestBody Branch branch
     ) {
         branch.getEmployees().forEach(e -> e.setBranch(branch));
-//      userAccount.getRoles().forEach(r -> r.setUserAccount(userAccount));
         return ResponseEntity.created(null).body(branchRepository.save(branch));
     }
     @GetMapping("/branch/{id}")
@@ -26,23 +25,47 @@ public class BranchController {
         return branchRepository.findById(id);
     }
 
-   @GetMapping("/branch")
+   @GetMapping("/branch/")
    public ResponseEntity<List<Branch>> getMany(
            @RequestParam(value = "city", required = false) String city,
            @RequestParam(value = "parent", required = false) Long parentId
    ) {
-        if (city == null && parentId == null) {
-            return ResponseEntity.ok(branchRepository.findAll());
-        }else if (city != null && parentId == null){
-            return ResponseEntity.ok(branchRepository.findByCity(city));
-        }else if (parentId != null && city == null){
-            return ResponseEntity.ok(branchRepository.findByParentId(parentId));
-        }else{
-            return ResponseEntity.ok(branchRepository.findByParentIdAndCity(parentId, city));
-        }
+       List<Branch> Branches = this.familyForCityAndParentId(city, parentId);
+       return ResponseEntity.ok(Branches);
    }
+   private List<Branch> familyForCityAndParentId(String city, Long  parentId) {
+
+       List<Branch> branches ;
+       if (city == null && parentId == null) {
+           branches = this.assignParent(branchRepository.findAll());
+       }else if (city != null && parentId == null) {
+           branches = branchRepository.findByCity(city);
+       }else if (parentId != null && city == null) {
+           branches= this.assignParent(branchRepository.findByParentId(parentId), branchRepository.findById(parentId));
+       }else{
+           branches = this.assignParent(branchRepository.findByParentIdAndCity(parentId, city), branchRepository.findById(parentId));
+       }
+       branches = this.assignChild(branches);
+       return branches;
+   }
+    private List<Branch> assignChild(List<Branch> branches){
+        branches.forEach(b -> { if (b.getChildId() != null) { b.setChild(branchRepository.findById(b.getChildId()));}});
+        return  branches;
+    }
+   private List<Branch> assignParent(List<Branch> branches){
+        branches.forEach(b -> { if (b.getParentId() != null) { b.setParent(branchRepository.findById(b.getParentId()));}});
+        return  branches;
+   }
+    private List<Branch> assignParent(List<Branch> branches, Optional<Branch> branch){
+        branches.forEach(b -> b.setParent(branch));
+        return  branches;
+    }
     @DeleteMapping("/branch/{id}")
     public ResponseEntity<ResponseEntity> remove(@PathVariable("id") Long id) {
+        return this.deleteById(id);
+//
+    }
+    private ResponseEntity<ResponseEntity> deleteById(Long id){
         Optional<Branch> branch = branchRepository.findById(id);
         if (branch.isPresent()) {
             branchRepository.deleteById(id);

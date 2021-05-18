@@ -32,7 +32,9 @@ public class EmployeeController {
     public ResponseEntity<List<Employee>> getMany(
             @RequestParam(value = "branch", required = false) Long branchId
             ) {
-        return branchId == null ? ResponseEntity.ok(employeeRepository.findAll()) : ResponseEntity.ok(employeeRepository.findByBranchId(branchId));
+
+        List<Employee> employeeeees =  branchId == null ? employeeRepository.findAll() : employeeRepository.findByBranchId(branchId);
+        return ResponseEntity.ok(employeeeees);
     }
     @DeleteMapping("/employee/{id}")
     public ResponseEntity<ResponseEntity> remove(
@@ -46,7 +48,4 @@ public class EmployeeController {
             return ResponseEntity.notFound().build();
         }
     }
-
-
-
 }
