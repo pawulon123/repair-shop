@@ -26,10 +26,5 @@ public class Employee extends BaseEntity {
         @OneToMany(mappedBy = "employee", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     List<EmployeeSkill> skills;
 
-        @ManyToOne(fetch = FetchType.EAGER)
-        @JoinColumn(name = "branch_id")
-        @JsonIgnore
-    Branch branch;
-
-
+    Long branchId;
 }

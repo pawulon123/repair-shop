@@ -21,44 +21,28 @@ public class Branch extends BaseEntity {
 
     String name;
 
-        @AttributeOverrides({
-                @AttributeOverride(name = "country", column = @Column(name = "STATIONING_COUNTRY")),
-                @AttributeOverride(name = "city", column = @Column(name = "STATIONING_CITY")),
-                @AttributeOverride(name = "postalCode", column = @Column(name = "STATIONING_POSTAL_CODE")),
-                @AttributeOverride(name = "street", column = @Column(name = "STATIONING_STREET")),
-                @AttributeOverride(name = "numberBuilding", column = @Column(name = "STATIONING_NUMBER_BUILDING")),
-        })
-   Address stationingAddress;
+    @AttributeOverrides({
+            @AttributeOverride(name = "country", column = @Column(name = "STATIONING_COUNTRY")),
+            @AttributeOverride(name = "city", column = @Column(name = "STATIONING_CITY")),
+            @AttributeOverride(name = "postalCode", column = @Column(name = "STATIONING_POSTAL_CODE")),
+            @AttributeOverride(name = "street", column = @Column(name = "STATIONING_STREET")),
+            @AttributeOverride(name = "numberBuilding", column = @Column(name = "STATIONING_NUMBER_BUILDING")),
+    })
+    Address stationingAddress;
 
-        @AttributeOverrides({
-                @AttributeOverride(name = "country", column = @Column(name = "CORRESPONDENCE_COUNTRY")),
-                @AttributeOverride(name = "city", column = @Column(name = "CORRESPONDENCE_CITY")),
-                @AttributeOverride(name = "postalCode", column = @Column(name = "CORRESPONDENCE_POSTAL_CODE")),
-                @AttributeOverride(name = "street", column = @Column(name = "CORRESPONDENCE_STREET")),
-                @AttributeOverride(name = "numberBuilding", column = @Column(name = "CORRESPONDENCE_NUMBER_BUILDING")),
-        })
-   Address correspondenceAddress;
+    @AttributeOverrides({
+            @AttributeOverride(name = "country", column = @Column(name = "CORRESPONDENCE_COUNTRY")),
+            @AttributeOverride(name = "city", column = @Column(name = "CORRESPONDENCE_CITY")),
+            @AttributeOverride(name = "postalCode", column = @Column(name = "CORRESPONDENCE_POSTAL_CODE")),
+            @AttributeOverride(name = "street", column = @Column(name = "CORRESPONDENCE_STREET")),
+            @AttributeOverride(name = "numberBuilding", column = @Column(name = "CORRESPONDENCE_NUMBER_BUILDING")),
+    })
+    Address correspondenceAddress;
 
-        @Enumerated(value = EnumType.STRING)
-   TypeActivity typeActivity;
+    @Enumerated(value = EnumType.STRING)
+    TypeActivity typeActivity;
 
-        @OneToMany(mappedBy = "branch", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-   List<Employee> employees;
+    Long parentId;
 
-        @Transient()
-  Optional<Branch> parent;
-  Long parentId;
-
-        @Transient()
-  Optional<Branch> child;
-  Long childId;
-
-//    @ManyToOne(cascade={CascadeType.ALL})
-//    @JoinColumn(name="parentId")
-//    @JsonIgnore
-//    private Branch parent;
-//
-//    @OneToMany(mappedBy="parent")
-//    private Set<Branch> subordinates = new HashSet<Branch>();
-
+    Long childId;
 }

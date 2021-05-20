@@ -18,28 +18,31 @@ public class EmployeeController {
     @PostMapping("/employee")
     public ResponseEntity<Employee> addNew(
             @RequestBody Employee employee
-        ) {
-      employee.getSkills().forEach(s -> s.setEmployee(employee));
+    ) {
+//      employee.getSkills().forEach(s -> s.setEmployee(employee));
         return ResponseEntity.created(null).body(employeeRepository.save(employee));
     }
+
     @GetMapping("/employee/{id}")
     public Optional<Employee> getOne(
             @PathVariable("id") Long id
-        ) {
+    ) {
         return employeeRepository.findById(id);
     }
+
     @GetMapping("/employee")
     public ResponseEntity<List<Employee>> getMany(
             @RequestParam(value = "branch", required = false) Long branchId
-            ) {
+    ) {
 
-        List<Employee> employeeeees =  branchId == null ? employeeRepository.findAll() : employeeRepository.findByBranchId(branchId);
-        return ResponseEntity.ok(employeeeees);
+        List<Employee> employees = branchId == null ? employeeRepository.findAll() : employeeRepository.findByBranchId(branchId);
+        return ResponseEntity.ok(employees);
     }
+
     @DeleteMapping("/employee/{id}")
     public ResponseEntity<ResponseEntity> remove(
             @PathVariable("id") Long id
-        ) {
+    ) {
         Optional<Employee> employee = employeeRepository.findById(id);
         if (employee.isPresent()) {
             employeeRepository.deleteById(id);
