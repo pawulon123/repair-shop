@@ -18,7 +18,7 @@ public class BranchController {
     public ResponseEntity<Branch> addNew(
             @RequestBody Branch branch
     ) {
-        branch.getEmployees().forEach(e -> e.setBranch(branch));
+//        branch.getEmployees().forEach(e -> e.setBranch(branch));
         return ResponseEntity.created(null).body(branchRepository.save(branch));
     }
 
