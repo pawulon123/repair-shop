@@ -1,8 +1,7 @@
 package com.wsiiz.repairshop.vehicleFile.application;
 
-import com.wsiiz.repairshop.shareStore.Vehicle;
-import com.wsiiz.repairshop.vehicleFile.domain.VehicleCustomer;
-import com.wsiiz.repairshop.vehicleFile.domain.VehicleCustomerRepository;
+import com.wsiiz.repairshop.vehicleFile.domain.Vehicle;
+import com.wsiiz.repairshop.vehicleFile.domain.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,39 +13,39 @@ import java.util.Optional;
 public class VehicleCustomerController {
 
     @Autowired
-    VehicleCustomerRepository vehicleCustomerRepository;
+    VehicleRepository vehicleRepository;
 
-    @PostMapping("/vehicle-customer/")
-    public ResponseEntity<VehicleCustomer> addNew(
-            @RequestBody VehicleCustomer vehicle
+    @PostMapping("/vehicle/")
+    public ResponseEntity<Vehicle> addNew(
+            @RequestBody Vehicle vehicle
     ) {
-        return ResponseEntity.created(null).body(vehicleCustomerRepository.save(vehicle));
+        return ResponseEntity.created(null).body(vehicleRepository.save(vehicle));
     }
 
-    @GetMapping("/vehicle-customer/{id}")
-    public Optional<VehicleCustomer> getOne(@PathVariable("id") Long id) {
-        return vehicleCustomerRepository.findById(id);
+    @GetMapping("/vehicle/{id}")
+    public Optional<Vehicle> getOne(@PathVariable("id") Long id) {
+        return vehicleRepository.findById(id);
     }
 
-    @GetMapping("/vehicle-customer/")
-    public ResponseEntity<List<VehicleCustomer>> getMany(
+    @GetMapping("/vehicle/")
+    public ResponseEntity<List<Vehicle>> getMany(
             @RequestParam(value = "vin", required = false) String vin,
             @RequestParam(value = "register", required = false) String register
 //            @RequestParam(value = "surname", required = false) String surname,
 //            @RequestParam(value = "insurance", required = false) String insurance
     ) {
-        return ResponseEntity.ok(vehicleCustomerRepository.findByCriteria(vin, register));
+        return ResponseEntity.ok(vehicleRepository.findByCriteria(vin, register));
     }
 
-    @DeleteMapping("/vehicle-customer/{id}")
+    @DeleteMapping("/vehicle/{id}")
     public ResponseEntity<ResponseEntity> remove(@PathVariable("id") Long id) {
         return this.deleteById(id);
     }
 
     private ResponseEntity<ResponseEntity> deleteById(Long id) {
-        Optional<VehicleCustomer> vehicle = vehicleCustomerRepository.findById(id);
+        Optional<Vehicle> vehicle = vehicleRepository.findById(id);
         if (vehicle.isPresent()) {
-            vehicleCustomerRepository.deleteById(id);
+            vehicleRepository.deleteById(id);
             return ResponseEntity.status(200).build();
         } else {
             return ResponseEntity.notFound().build();

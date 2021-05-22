@@ -1,13 +1,13 @@
 package com.wsiiz.repairshop.vehicleFile.domain;
 
 import com.wsiiz.repairshop.foundation.domain.AbstractFactory;
-import com.wsiiz.repairshop.shareStore.Vehicle;
+import com.wsiiz.repairshop.shareStore.VehicleAbstract;
 import org.springframework.stereotype.Component;
 
 @Component
-public class VehicleCompanyFactory implements AbstractFactory<Vehicle> {
+public class VehicleFactory implements AbstractFactory<Vehicle> {
     @Override
-    public VehicleCompany create() {
-        return new VehicleCompany();
+    public Vehicle create() {
+        return new Vehicle();
     }
 }

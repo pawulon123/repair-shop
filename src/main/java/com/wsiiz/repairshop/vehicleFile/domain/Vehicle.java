@@ -1,21 +1,17 @@
 package com.wsiiz.repairshop.vehicleFile.domain;
 
-import com.wsiiz.repairshop.shareStore.StatusSchedule;
-import com.wsiiz.repairshop.shareStore.Vehicle;
+import com.wsiiz.repairshop.shareStore.VehicleAbstract;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.util.Set;
 
 @Entity
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = true)
 @NoArgsConstructor
-@AllArgsConstructor
-@DiscriminatorValue("CUSTOMER")
-
-public class VehicleCustomer extends Vehicle {
-    StatusSchedule statusSchedule;
-}
+public class Vehicle extends VehicleAbstract {}

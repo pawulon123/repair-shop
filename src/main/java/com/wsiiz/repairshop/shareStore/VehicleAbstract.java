@@ -1,7 +1,8 @@
 package com.wsiiz.repairshop.shareStore;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wsiiz.repairshop.foundation.domain.BaseEntity;
-import com.wsiiz.repairshop.shareStore.VehicleType;
+import com.wsiiz.repairshop.vehicleFile.domain.Ownership;
 import com.wsiiz.repairshop.vehicleFile.domain.body.Body;
 import com.wsiiz.repairshop.vehicleFile.domain.chassis.Chassis;
 import lombok.AllArgsConstructor;
@@ -9,31 +10,39 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
+@Table(name = "VEHICLE")
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "OWNER_TYPE", discriminatorType = DiscriminatorType.STRING)
-public abstract class Vehicle extends BaseEntity {
+public abstract class VehicleAbstract extends BaseEntity {
     VehicleType vehicleType;
     String brand;
     String model;
-    Long ownerId;
     String registrationNumber;
     String insurance;
     LocalDate productionDate;
-    Long chassisId;
-    Long bodyId;
     String vin;
+    StatusSchedule statusSchedule;
 
-    @OneToOne(mappedBy = "vehicle", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne( fetch = FetchType.EAGER)
+    @JoinColumn(name = "body_Id")
+    @JsonIgnore
     public Body body;
 
-    @OneToOne(mappedBy = "vehicle", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "chassis_Id")
+    @JsonIgnore
     public Chassis chassis;
+
+    @OneToMany(mappedBy = "vehicle")
+    Set<Ownership> vehiclesOwners;
+
 }
