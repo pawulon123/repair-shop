@@ -1,6 +1,6 @@
 package com.wsiiz.repairshop.customers.domain;
 
-import com.wsiiz.repairshop.enterprise.domain.branch.Address;
+import com.wsiiz.repairshop.shareStore.BaseAddress;
 import com.wsiiz.repairshop.foundation.domain.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,7 +29,7 @@ public abstract class Customer extends BaseEntity {
             @AttributeOverride(name = "street", column = @Column(name = "STATIONING_STREET")),
             @AttributeOverride(name = "numberBuilding", column = @Column(name = "STATIONING_NUMBER_BUILDING")),
     })
-   Address stationingAddress;
+    BaseAddress stationingAddress;
 
     @AttributeOverrides({
             @AttributeOverride(name = "country", column = @Column(name = "CORRESPONDENCE_COUNTRY")),
@@ -38,5 +38,5 @@ public abstract class Customer extends BaseEntity {
             @AttributeOverride(name = "street", column = @Column(name = "CORRESPONDENCE_STREET")),
             @AttributeOverride(name = "numberBuilding", column = @Column(name = "CORRESPONDENCE_NUMBER_BUILDING")),
     })
-    Address correspondenceAddress;
+    BaseAddress correspondenceAddress;
 }
