@@ -1,4 +1,4 @@
-package com.wsiiz.repairshop.vehicleFile.domain;
+package com.wsiiz.repairshop.vehicleFile.domain.Owner;
 
 import com.wsiiz.repairshop.foundation.domain.BaseEntity;
 import lombok.Data;
@@ -13,7 +13,8 @@ import java.util.Set;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = true)
 @NoArgsConstructor
-public class Owner extends BaseEntity {
+public class Owner<M extends Owner> extends BaseEntity {
+//    @JsonIgnore
     @OneToMany(mappedBy = "owner")
     Set<Ownership> vehiclesOwners;
 }

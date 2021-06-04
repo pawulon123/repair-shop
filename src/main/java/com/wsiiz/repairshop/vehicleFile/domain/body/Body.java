@@ -3,6 +3,7 @@ package com.wsiiz.repairshop.vehicleFile.domain.body;
 import com.wsiiz.repairshop.enterprise.domain.employee.EmployeeSkill;
 import com.wsiiz.repairshop.foundation.domain.BaseEntity;
 import com.wsiiz.repairshop.shareStore.VehicleAbstract;
+import com.wsiiz.repairshop.vehicleFile.domain.Vehicle;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -23,7 +24,6 @@ public class Body extends BaseEntity {
     String upholsteryDescribe;
     Type type;
 
-    @OneToMany(mappedBy = "body", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    List<VehicleAbstract> vehicles;
-
+    @OneToOne(mappedBy = "body")
+    VehicleAbstract vehicle;
 }

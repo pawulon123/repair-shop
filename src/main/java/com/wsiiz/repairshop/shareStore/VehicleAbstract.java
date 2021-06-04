@@ -1,15 +1,13 @@
 package com.wsiiz.repairshop.shareStore;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wsiiz.repairshop.foundation.domain.BaseEntity;
-import com.wsiiz.repairshop.vehicleFile.domain.Ownership;
+import com.wsiiz.repairshop.vehicleFile.domain.Owner.Ownership;
 import com.wsiiz.repairshop.vehicleFile.domain.body.Body;
 import com.wsiiz.repairshop.vehicleFile.domain.chassis.Chassis;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
 
 
 import javax.persistence.*;
@@ -32,17 +30,17 @@ public abstract class VehicleAbstract extends BaseEntity {
     String vin;
     StatusSchedule statusSchedule;
 
-    @ManyToOne( fetch = FetchType.EAGER)
-    @JoinColumn(name = "body_Id")
-    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "body_id", referencedColumnName = "id")
     public Body body;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "chassis_Id")
-    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "chassis_id", referencedColumnName = "id")
     public Chassis chassis;
 
     @OneToMany(mappedBy = "vehicle")
     Set<Ownership> vehiclesOwners;
+
+
 
 }

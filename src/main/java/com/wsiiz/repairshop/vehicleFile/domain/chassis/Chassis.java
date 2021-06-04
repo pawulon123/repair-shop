@@ -20,6 +20,6 @@ public class Chassis extends BaseEntity {
     Long transmissionId;
     String suspension;
 
-    @OneToMany(mappedBy = "chassis", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    List<VehicleAbstract> vehicles;
+    @OneToOne(mappedBy = "chassis")
+    VehicleAbstract vehicle;
 }

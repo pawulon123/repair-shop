@@ -1,5 +1,6 @@
 package com.wsiiz.repairshop.vehicleFile.domain;
 
+import com.wsiiz.repairshop.vehicleFile.domain.Owner.MainOwner;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -17,4 +18,10 @@ public class VehicleOwnerKey implements Serializable {
 
     @Column(name = "owner_id")
     Long ownerId;
+
+    @Column(name = "maine_owner_id")
+    Long maineOwnerId;
+//or
+//    @Column(name = "maine_owner")
+//    Boolean maineOwner;
 }
