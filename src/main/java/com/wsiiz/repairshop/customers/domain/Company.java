@@ -21,4 +21,9 @@ public class Company extends Customer {
     String Regon;
     @Enumerated(EnumType.STRING)
     ActivityType activityType;
+
+    @Override
+    public String fullName() {
+        return name;
+    }
 }

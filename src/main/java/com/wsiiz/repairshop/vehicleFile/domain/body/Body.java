@@ -1,5 +1,6 @@
 package com.wsiiz.repairshop.vehicleFile.domain.body;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wsiiz.repairshop.enterprise.domain.employee.EmployeeSkill;
 import com.wsiiz.repairshop.foundation.domain.BaseEntity;
 import com.wsiiz.repairshop.shareStore.VehicleAbstract;
@@ -23,7 +24,7 @@ public class Body extends BaseEntity {
     LacquerTyp lacquerTyp;
     String upholsteryDescribe;
     Type type;
-
+    @JsonIgnore
     @OneToOne(mappedBy = "body")
     VehicleAbstract vehicle;
 }

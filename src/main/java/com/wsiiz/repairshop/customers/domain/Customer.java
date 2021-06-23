@@ -39,4 +39,6 @@ public abstract class Customer extends BaseEntity {
             @AttributeOverride(name = "numberBuilding", column = @Column(name = "CORRESPONDENCE_NUMBER_BUILDING")),
     })
     BaseAddress correspondenceAddress;
+
+    public abstract String  fullName();
 }

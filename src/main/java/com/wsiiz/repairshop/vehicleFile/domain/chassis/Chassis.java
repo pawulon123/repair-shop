@@ -1,5 +1,6 @@
 package com.wsiiz.repairshop.vehicleFile.domain.chassis;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wsiiz.repairshop.foundation.domain.BaseEntity;
 import com.wsiiz.repairshop.shareStore.VehicleAbstract;
 import lombok.AllArgsConstructor;
@@ -19,7 +20,7 @@ public class Chassis extends BaseEntity {
     Long engineId;
     Long transmissionId;
     String suspension;
-
+    @JsonIgnore
     @OneToOne(mappedBy = "chassis")
     VehicleAbstract vehicle;
 }

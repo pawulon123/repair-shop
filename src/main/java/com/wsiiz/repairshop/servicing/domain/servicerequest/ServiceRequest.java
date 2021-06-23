@@ -1,10 +1,13 @@
 package com.wsiiz.repairshop.servicing.domain.servicerequest;
 
 import com.wsiiz.repairshop.foundation.domain.BaseEntity;
+
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+
+import com.wsiiz.repairshop.shareStore.RepairStation;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -13,17 +16,23 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = true)
 public class ServiceRequest extends BaseEntity {
 
-  Long vehicleId;
+    public ServiceRequest() {
+        this.registrationTime = LocalDateTime.now();
+    }
 
-  @Enumerated(value = EnumType.STRING)
-  RequestType requestType;
+    Long vehicleId;
 
-  String description;
+    @Enumerated(value = EnumType.STRING)
+    RequestType requestType;
 
-  LocalDateTime registrationTime;
+    String description;
 
-  public ServiceRequest() {
-    this.registrationTime = LocalDateTime.now();
-  }
+    LocalDateTime registrationTime;
 
+    @Enumerated(value = EnumType.STRING)
+    RepairStation repairStation;
+
+    LocalDateTime start;
+
+    LocalDateTime end;
 }

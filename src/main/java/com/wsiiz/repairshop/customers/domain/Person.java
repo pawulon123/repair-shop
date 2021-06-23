@@ -19,4 +19,9 @@ public class Person extends Customer{
     String surName;
     LocalDate birthDate;
     String pesel;
+
+    @Override
+    public String fullName() {
+        return name  + " " + surName;
+    }
 }

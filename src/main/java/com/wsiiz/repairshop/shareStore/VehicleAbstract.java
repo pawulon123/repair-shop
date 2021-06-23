@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -40,7 +41,4 @@ public abstract class VehicleAbstract extends BaseEntity {
 
     @OneToMany(mappedBy = "vehicle")
     Set<Ownership> vehiclesOwners;
-
-
-
 }

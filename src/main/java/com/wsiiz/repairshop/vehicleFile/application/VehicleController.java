@@ -4,6 +4,7 @@ import com.wsiiz.repairshop.vehicleFile.domain.Owner.Ownership;
 import com.wsiiz.repairshop.vehicleFile.domain.Owner.OwnershipRepository;
 import com.wsiiz.repairshop.vehicleFile.domain.Vehicle;
 import com.wsiiz.repairshop.vehicleFile.domain.VehicleRepository;
+import com.wsiiz.repairshop.vehicleFile.domain.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,14 +21,19 @@ public class VehicleController {
     @Autowired
     OwnershipRepository ownershipRepository;
 
+    @Autowired
+    VehicleService vehicleService;
+
     @PostMapping("/vehicle/")
     public ResponseEntity<Vehicle> addNew(
             @RequestBody Vehicle vehicle
     ) {
-//    vehicle.getVehiclesOwners().forEach( vehiclesOwners ->   this.assignToOwnership(vehiclesOwners));
-        return ResponseEntity.created(null).body(vehicleRepository.save(vehicle));
-    }
 
+//    vehicle.getVehiclesOwners().forEach( vehiclesOwners ->   this.assignToOwnership(vehiclesOwners));
+//        return vehicleService.save(vehicle);
+//        return ResponseEntity.created(null).body(vehicleService.save(vehicle));
+        return null;
+    }
     private void assignToOwnership(Ownership vehiclesOwners) {
     }
 
